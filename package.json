@@ -4,8 +4,13 @@
   "description": "nodejs application",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "react-scripts start",
+    "build": "CI=false react-scripts build",
+    "test": "react-scripts test --watchAll=false --ci --passWithNoTests",
+    "test:coverage": "react-scripts test --watchAll=false --ci --coverage --passWithNoTests",
+    "eject": "react-scripts eject",
+    "deploy:prod": "echo 'Deploying to production environment...'",
+    "deploy:stage": "echo 'Deploying to staging environment...'"
   },
   "dependencies": {
     "ejs": "^3.1.10",
