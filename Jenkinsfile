@@ -29,22 +29,27 @@ pipeline {
         
         stage('Install Dependencies') {
             steps {
-                 echo 'Installing dependencies...'
-                 sh 'npm --version'
-                 sh 'node --version'
-                 sh 'npm install'
-             }
-         }
-        
-        stage('Test') {
-            steps {
-                echo 'Running tests...'
+                echo 'Installing dependencies...'
                 sh '''
-                    echo "Running React tests..."
-                    npm test
-                    echo "Tests completed successfully"
+                    echo "Node.js version:"
+                    node --version
+                    echo "NPM version:"
+                    npm --version
+                    echo "Installing dependencies..."
+                    npm ci
+                    echo "Checking installed packages..."
+                    npm list --depth=0 || echo "Some peer dependency warnings (normal)"
                 '''
             }
+        }
+        
+        stage('Test') {
+  steps {
+    sh 'ls -la node_modules/react-scripts || echo "react-scripts not found"'
+    sh 'npm test'
+  }
+}
+
             post {
                 always {
                     echo 'Test stage completed'
