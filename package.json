@@ -6,7 +6,9 @@
     "start": "node app.js",
     "test": "react-scripts test --watchAll=false --ci --passWithNoTests",
     "test:coverage": "react-scripts test --watchAll=false --ci --coverage --passWithNoTests",
-    "build": "echo 'Build completed successfully' "
+    "build": "echo 'Build completed successfully' ",
+    "deploy:stage": "echo 'Staging deployment script running...'",
+    "deploy:prod": "echo 'Production deployment script running...'"
   },
   "keywords": [],
   "author": "",
