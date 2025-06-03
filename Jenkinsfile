@@ -28,13 +28,13 @@ pipeline {
 
         
         stage('Install Dependencies') {
-            stage('Install Dependencies') {
-                steps {
-                    sh 'npm ci || npm install'
-                }
-            }
-
-        }
+            steps {
+                 echo 'Installing dependencies...'
+                 sh 'npm --version'
+                 sh 'node --version'
+                 sh 'npm install'
+             }
+         }
         
         stage('Test') {
             steps {
