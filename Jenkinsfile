@@ -44,11 +44,11 @@ pipeline {
         }
         
         stage('Test') {
-  steps {
-    sh 'ls -la node_modules/react-scripts || echo "react-scripts not found"'
-    sh 'npm test'
-  }
-}
+            steps {
+                sh 'ls -la node_modules/react-scripts || echo "react-scripts not found"'
+                sh 'npm test'
+            }     
+        }
 
             post {
                 always {
@@ -146,4 +146,3 @@ pipeline {
             echo 'Pipeline failed!'
         }
     }
-}
