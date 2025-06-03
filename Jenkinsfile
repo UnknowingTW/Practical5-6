@@ -19,21 +19,21 @@ pipeline {
                 echo 'Checking out code...'
             }
         }
+
+        stage('Clean Workspace') {
+            steps {
+                deleteDir()
+                }
+        }
+
         
         stage('Install Dependencies') {
-            steps {
-                echo 'Installing dependencies...'
-                sh '''
-                    echo "Node.js version:"
-                    node --version
-                    echo "NPM version:"
-                    npm --version
-                    echo "Installing dependencies..."
-                    npm ci
-                    echo "Checking installed packages..."
-                    npm list --depth=0 || echo "Some peer dependency warnings (normal)"
-                '''
+            stage('Install Dependencies') {
+                steps {
+                    sh 'npm ci || npm install'
+                }
             }
+
         }
         
         stage('Test') {
