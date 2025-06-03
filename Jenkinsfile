@@ -22,20 +22,23 @@ pipeline {
             }
         }
 
-
         stage('Install Dependencies') {
-             steps {
-                 echo 'Installing dependencies...'
-                 sh 'npm --version'
-                 sh 'node --version'
-                 sh 'npm install'
-             }
-         }
+            steps {
+                dir('Practical5-6') { 
+                    echo 'Installing dependencies...'
+                    sh 'npm --version'
+                    sh 'node --version'
+                    sh 'npm install'
+                }
+            }
+        }
 
         stage('Test') {
             steps {
-                sh 'ls -la node_modules/react-scripts || echo "react-scripts not found"'
-                sh 'npm test'
+                dir('Practical5-6') {
+                    sh 'ls -la node_modules/react-scripts || echo "react-scripts not found"'
+                    sh 'npm test'
+                }
             }
             post {
                 always {
@@ -52,12 +55,14 @@ pipeline {
 
         stage('Build Application') {
             steps {
-                echo 'Building React application...'
-                sh 'npm run build'
+                dir('Practical5-6') {
+                    echo 'Building React application...'
+                    sh 'npm run build'
+                }
             }
             post {
                 success {
-                    archiveArtifacts artifacts: 'build/**/*', allowEmptyArchive: true
+                    archiveArtifacts artifacts: 'Practical5-6/build/**/*', allowEmptyArchive: true
                 }
             }
         }
