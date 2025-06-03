@@ -35,7 +35,7 @@ pipeline {
                     echo "NPM version:"
                     npm --version
                     echo "Installing dependencies..."
-                    npm ci
+                    npm install
                     echo "Checking installed packages..."
                     npm list --depth=0 || echo "Some peer dependency warnings (normal)"
                 '''
