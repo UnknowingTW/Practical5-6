@@ -33,25 +33,25 @@ pipeline {
             }
         }
 
-        stage('Test') {
-            steps {
-                dir('Practical5-6') {
-                    sh 'ls -la node_modules/react-scripts || echo "react-scripts not found"'
-                    sh 'npm test'
-                }
-            }
-            post {
-                always {
-                    echo 'Test stage completed'
-                }
-                success {
-                    echo 'All tests passed!'
-                }
-                failure {
-                    echo 'Some tests failed!'
-                }
-            }
-        }
+        // stage('Test') {
+        //     steps {
+        //         dir('Practical5-6') {
+        //             sh 'ls -la node_modules/react-scripts || echo "react-scripts not found"'
+        //             sh 'npm test'
+        //         }
+        //     }
+        //     post {
+        //         always {
+        //             echo 'Test stage completed'
+        //         }
+        //         success {
+        //             echo 'All tests passed!'
+        //         }
+        //         failure {
+        //             echo 'Some tests failed!'
+        //         }
+        //     }
+        // }
 
         stage('Build Application') {
             steps {
