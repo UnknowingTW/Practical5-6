@@ -90,7 +90,7 @@ pipeline {
         stage('Push to Docker Hub') {
             when {
                 anyOf {
-                    branch 'main'
+                    branch 'master'
                     environment name: 'BUILD_DOCKER', value: 'true'
                 }
             }
@@ -125,7 +125,7 @@ pipeline {
         success {
             echo 'Pipeline succeeded!'
             script {
-                if (env.BRANCH_NAME == 'main') {
+                if (env.BRANCH_NAME == 'master') {
                     echo "Docker image pushed: ${DOCKER_IMAGE}:${DOCKER_TAG}"
                 }
             }
