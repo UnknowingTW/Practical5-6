@@ -16,15 +16,12 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
+                deleteDir()
                 echo 'Checking out code...'
+                checkout scm
             }
         }
 
-        stage('Clean Workspace') {
-            steps {
-                deleteDir()
-            }
-        }
 
         stage('Install Dependencies') {
              steps {
