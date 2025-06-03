@@ -1,10 +1,10 @@
 pipeline {
     agent any
-    
+
     tools {
         nodejs 'NodeJS 24.1.0'
     }
-    
+
     environment {
         CI = 'true'
         NODE_ENV = 'production'
@@ -12,7 +12,7 @@ pipeline {
         DOCKER_IMAGE = 'unknowntw/my-nodejs-app'
         DOCKER_TAG = "${BUILD_NUMBER}"
     }
-    
+
     stages {
         stage('Checkout') {
             steps {
@@ -23,10 +23,9 @@ pipeline {
         stage('Clean Workspace') {
             steps {
                 deleteDir()
-                }
+            }
         }
 
-        
         stage('Install Dependencies') {
             steps {
                 echo 'Installing dependencies...'
@@ -42,14 +41,12 @@ pipeline {
                 '''
             }
         }
-        
+
         stage('Test') {
             steps {
                 sh 'ls -la node_modules/react-scripts || echo "react-scripts not found"'
                 sh 'npm test'
-            }     
-        }
-
+            }
             post {
                 always {
                     echo 'Test stage completed'
@@ -62,7 +59,7 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Build Application') {
             steps {
                 echo 'Building React application...'
@@ -74,7 +71,7 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Build Docker Image') {
             when {
                 anyOf {
@@ -96,7 +93,7 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Push to Docker Hub') {
             when {
                 anyOf {
@@ -113,22 +110,20 @@ pipeline {
                 }
             }
         }
-        
-        
+
         stage('Deploy') {
             steps {
                 script {
-                if (env.BRANCH_NAME == 'master') {
-                    sh 'npm run deploy:prod'
-                } else {
-                    sh 'npm run deploy:stage'
-                }
+                    if (env.BRANCH_NAME == 'master') {
+                        sh 'npm run deploy:prod'
+                    } else {
+                        sh 'npm run deploy:stage'
+                    }
                 }
             }
-	    }
-
+        }
     }
-    
+
     post {
         always {
             echo 'Pipeline completed!'
@@ -146,3 +141,4 @@ pipeline {
             echo 'Pipeline failed!'
         }
     }
+}
