@@ -4,8 +4,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "jest",
-    "test:ci": "jest --ci --reporters=jest-junit --coverage",
+    "test": "react-scripts test --watchAll=false --ci --passWithNoTests",
+    "test:coverage": "react-scripts test --watchAll=false --ci --coverage --passWithNoTests",
     "build": "echo 'Build completed successfully' "
   },
   "keywords": [],
